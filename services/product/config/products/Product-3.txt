@@ -1,7 +1,5 @@
 {
 
-  "ApiVersion": 0.1,
-
   "Name": "Moto G4 Plus",
 
   "Description": [

@@ -1,8 +1,6 @@
 {
 
-  "ApiVersion": 1.2,
-
-  "Name": "Galaxy S6",
+  "Name": "Galaxy S7",
 
   "Description": [
 

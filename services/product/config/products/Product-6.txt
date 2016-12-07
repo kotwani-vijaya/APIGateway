@@ -1,0 +1,35 @@
+{
+
+   "Name": "Galaxy S9",
+
+  "Description": [
+
+    "Compact Design",   "Corning Gorilla Glass", "Stylish body"
+
+  ],
+
+  "Cost": "9599.00",
+
+  "Discount": "5%",
+
+  "InStock": "Yes",
+
+  "Rating": "2.8",
+
+  "CashOnDelivery": "Yes",
+
+  "ImageURL": "http://ImageServiceEndPoint/imagename.jpg",
+
+  "Seller": {
+
+    "Name": "Galaxy Store",
+
+    "Ratings": "3.3",
+
+    "RatingsFrom": "5",
+
+    "Verified": "Yes"
+
+  }
+
+}

@@ -30,7 +30,7 @@ public class ProductController {
 	private static final Logger LOGGER = LogManager
 			.getLogger(ProductController.class.getName());
 
-	@RequestMapping(value = "GetProducts/{ProductId}", method = RequestMethod.GET)
+	@RequestMapping(value = "products/{ProductId}", method = RequestMethod.GET)
 	public ResponseEntity<ProductDetails> getProduct(
 			@PathVariable String ProductId) throws ProductNotFoundException {
 			LOGGER.info("Request logged with Request Id as : " + ProductId);
@@ -80,8 +80,7 @@ public class ProductController {
 		JSONParser parser = new JSONParser();
 		try {
 			Object obj = parser.parse(new FileReader(path));
-			JSONObject jsonObject = (JSONObject) obj;
-			double apiVersion = (Double) jsonObject.get("ApiVersion");
+			JSONObject jsonObject = (JSONObject) obj;			
 			String name = (String) jsonObject.get("Name");
 			JSONArray description = (JSONArray) jsonObject.get("Description");
 			String cost = (String) jsonObject.get("Cost");
@@ -98,7 +97,7 @@ public class ProductController {
 			sellerDetails = new SellerDetails(sellerName, verification,
 					ratings, ratingsFrom);
 			productDetails = new ProductDetails(name, cost, discount, inStock,
-					rating, cashOnDelivery, imageUrl, apiVersion, description,
+					rating, cashOnDelivery, imageUrl, description,
 					sellerDetails);
 
 		} catch (Exception e) {

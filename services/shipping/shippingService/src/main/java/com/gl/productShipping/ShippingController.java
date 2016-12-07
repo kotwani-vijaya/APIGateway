@@ -217,7 +217,7 @@ public class ShippingController implements ErrorController {
 	// ********************************************************************************************************
 
 	@SuppressWarnings({ "unchecked", "unused" })
-	@RequestMapping(value = "GetShippingAvailability/{customerId}/{productId}", method = RequestMethod.GET)
+	@RequestMapping(value = "shippingAvailability/{customerId}/{productId}", method = RequestMethod.GET)
 	public ResponseEntity<ShippingAvailability> shippingAvailability(
 			@PathVariable String customerId, @PathVariable String productId)
 			throws Exception {

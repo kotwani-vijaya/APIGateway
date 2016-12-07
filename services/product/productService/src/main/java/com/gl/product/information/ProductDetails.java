@@ -6,7 +6,6 @@ import java.util.List;
 public class ProductDetails {
 	private String name, cost, discount, inStock, rating, cashOnDelivery,
 			imageUrl;
-	private double apiVersion;
 	private List<String> description = new ArrayList<String>();
 	private SellerDetails sellerDetails;
 
@@ -66,14 +65,6 @@ public class ProductDetails {
 		this.imageUrl = imageUrl;
 	}
 
-	public double getApiVersion() {
-		return apiVersion;
-	}
-
-	public void setApiVersion(double apiVersion) {
-		this.apiVersion = apiVersion;
-	}
-
 	public List<String> getDescription() {
 		return description;
 	}
@@ -92,7 +83,7 @@ public class ProductDetails {
 
 	public ProductDetails(String name, String cost, String discount,
 			String inStock, String rating, String cashOnDelivery,
-			String imageUrl, double apiVersion, List<String> description,
+			String imageUrl, List<String> description,
 			SellerDetails sellerDetails) {
 		super();
 		this.name = name;
@@ -101,8 +92,7 @@ public class ProductDetails {
 		this.inStock = inStock;
 		this.rating = rating;
 		this.cashOnDelivery = cashOnDelivery;
-		this.imageUrl = imageUrl;
-		this.apiVersion = apiVersion;
+		this.imageUrl = imageUrl;		
 		this.description = description;
 		this.sellerDetails = sellerDetails;
 	}

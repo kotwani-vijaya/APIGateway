@@ -1,0 +1,6 @@
+com\gl\recommendation\dto\RecommendationDetails.class
+com\gl\recommendation\RecommendationController.class
+com\gl\recommendation\util\JsonUtil.class
+com\gl\recommendation\App.class
+com\gl\recommendation\util\FileUtil.class
+com\gl\recommendation\RecommendationNotFoundException.class

@@ -1,7 +1,5 @@
 {
 
-  "ApiVersion": 0.1,
-
   "Name": "Lumia 950",
 
   "Description": [

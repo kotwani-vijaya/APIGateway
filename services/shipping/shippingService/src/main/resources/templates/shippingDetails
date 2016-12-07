@@ -1,5 +1,5 @@
 [{
-	"productId": "A123",
+	"productId": "1",
 	"shippingLocations": [
 		"445001",
 		"440015",
@@ -10,7 +10,7 @@
 		"440002"
 	]
 }, {
-	"productId": "A897",
+	"productId": "2",
 	"shippingLocations": [
 		"440002",
 		"445001",
@@ -21,7 +21,7 @@
 		"440015"
 	]
 },  {
-	"productId": "C567",
+	"productId": "3",
 	"shippingLocations": [
 	    "445001",
 		"444902",
@@ -30,7 +30,27 @@
 		"500016"
 	]
 },  {
-	"productId": "D117",
+	"productId": "4",
+	"shippingLocations": [
+	    "500001",
+		"445001",
+		"444902",
+		"440017",
+		"440013",
+		"500016"
+	]
+},  {
+	"productId": "5",
+	"shippingLocations": [
+	    "500001",
+		"445001",
+		"444902",
+		"440017",
+		"440013",
+		"500016"
+	]
+},  {
+	"productId": "6",
 	"shippingLocations": [
 	    "500001",
 		"445001",

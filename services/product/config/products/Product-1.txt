@@ -1,8 +1,6 @@
 {
 
-  "ApiVersion": 8.1,
-
-  "Name": "Iphone 7",
+   "Name": "Iphone 7",
 
   "Description": [
 
