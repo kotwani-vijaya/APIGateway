@@ -1,0 +1,6 @@
+{
+  "Name": "Vidya Nair",
+  "Zip": "440018",
+  "City": "Nagpur",
+  "IsFirstPurchase": "Yes"
+}

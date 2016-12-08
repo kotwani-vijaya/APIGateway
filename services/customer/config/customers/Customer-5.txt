@@ -1,0 +1,7 @@
+{
+  "Name": "Sanjana Rathi",
+  "Zip": "440018",
+  "City": "Nagpur",
+  "IsFirstPurchase": "Yes"
+}
+
