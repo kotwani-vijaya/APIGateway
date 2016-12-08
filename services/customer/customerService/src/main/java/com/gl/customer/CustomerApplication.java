@@ -3,6 +3,7 @@ package com.gl.customer;
 import java.io.File;
 import java.io.IOException;
 
+import org.apache.log4j.PropertyConfigurator;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -18,12 +19,12 @@ public class CustomerApplication
     public static void main( String[] args )
     {
     	String customerProp = args[0];
-    	String log4j2Prop = args[1];
+    	String log4j2Path = args[1];
+    	PropertyConfigurator.configure(log4j2Path);
     	GetCustomerProperties properties = new GetCustomerProperties();
     	try {
 			properties.getProperties(customerProp);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     	String location = properties.location();
@@ -31,7 +32,6 @@ public class CustomerApplication
     	CustomerController getCustomers = new CustomerController();
     	getCustomers.setFileLocation(location);
     	getCustomers.setFiles(listOfFiles);
-    	getCustomers.setLogProperties(log4j2Prop);
     	SpringApplication.run(CustomerApplication.class, args);
     }
 }

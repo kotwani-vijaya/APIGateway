@@ -38,7 +38,7 @@ public class RecommendationController {
 					HttpStatus.BAD_REQUEST);
 		}				
 		recommendationDetails.setRecommendations(recommendations);	
-		LOGGER.info("Response returned for CID : " + cid +" and productId :" + productId + " is : "+JsonUtil.toJson(recommendationDetails));
+		LOGGER.info("Response returned for CID : " + cid +" and productId :" + productId + " is : \n"+JsonUtil.toJson(recommendationDetails));
 		return new ResponseEntity<RecommendationDetails>(recommendationDetails, HttpStatus.OK);
 	}
 

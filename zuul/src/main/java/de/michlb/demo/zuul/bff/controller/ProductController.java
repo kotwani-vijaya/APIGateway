@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import org.apache.commons.lang.math.RandomUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,6 +27,8 @@ import de.michlb.demo.zuul.util.JsonUtil;
 @RestController
 @RequestMapping("/bff/aggregated")
 public class ProductController {
+	
+	private static final Logger LOGGER = Logger.getLogger(ProductController.class.getName());
 
   @Autowired
   private ProductClient productClient;
@@ -51,6 +53,7 @@ public class ProductController {
 	  AggregatedResult aggregatedResult = new AggregatedResult();
 	  try {
 		  String cid = UUID.randomUUID().toString();
+		  LOGGER.info("Request received with CID : " + cid +" for productId :" + productId + " and customerId : "+customerId);
 		Product product = JsonUtil.toObject(productClient.getProduct(productId, cid), Product.class);
 		if(product != null) {
 			RecommendationDetails recommendationDetails = JsonUtil.toObject(recommendationsClient.getRecommendations(productId, customerId, cid), RecommendationDetails.class);
@@ -73,8 +76,9 @@ public class ProductController {
 		}
 		Customer customer = JsonUtil.toObject(customerClient.customerInfo(customerId, cid), Customer.class);
 		aggregatedResult.setCustomer(customer);
+		LOGGER.info("Response returned for CID : " + cid + " is : \n"+JsonUtil.toJson(aggregatedResult));
 	} catch (Exception e) {
-		e.printStackTrace();
+		LOGGER.error(e);
 	}
 
     return aggregatedResult;
