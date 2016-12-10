@@ -35,7 +35,8 @@ public class ProductController {
 		String product = "Product-" + ProductId;
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Access-Control-Allow-Origin", "*");
-		responseHeaders.add("Access-Control-Allow-Header", "CID");
+		responseHeaders.add("Access-Control-Allow-Methods", "GET, POST, PATCH, PUT, DELETE, OPTIONS");
+		responseHeaders.add("Access-Control-Allow-Headers", "Origin");
 		responseHeaders.add("Content-Type", "application/json");
 		ProductDetails productDetails = new ProductDetails();
 		if (ProductId.equals("") || ProductId.equals("\t") || ProductId.equals("\n")) {
