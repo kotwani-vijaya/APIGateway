@@ -36,8 +36,7 @@ public class ProductController {
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Access-Control-Allow-Origin", "*");
 		responseHeaders.add("Access-Control-Allow-Methods", "GET, POST, PATCH, PUT, DELETE, OPTIONS");
-		responseHeaders.add("Access-Control-Allow-Headers", "Origin");
-		responseHeaders.add("Content-Type", "application/json");
+		responseHeaders.add("Access-Control-Allow-Header", "Content-Type");		
 		ProductDetails productDetails = new ProductDetails();
 		if (ProductId.equals("") || ProductId.equals("\t") || ProductId.equals("\n")) {
 			LOGGER.info("Response logged with empty Request Id");
