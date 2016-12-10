@@ -25,7 +25,7 @@ public class CustomerController {
 
 	@RequestMapping(value = "/details/{CustomerId}", method = RequestMethod.GET)
 	public ResponseEntity<CustomerDetails> getCustomerDetails(
-			@PathVariable("CustomerId") String id, @RequestHeader("CID") String cid) throws CustomerNotFoundException {
+			@PathVariable("CustomerId") String id, @RequestHeader("CID") String cid) {
 		LOGGER.info("Request received with CID : " + cid +" for customerId : " + id);
 		if (id.equals("") || id.equals("\t") || id.equals("\n")) {
 			CustomerDetails cd = new CustomerDetails();
@@ -59,10 +59,7 @@ public class CustomerController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		if (flag == 0) {
-			LOGGER.info("Response returned for CID : " + cid +" is product not found");
-			throw new CustomerNotFoundException("1244", "Invalid Product Id");
-		}
+		
 		CustomerDetails empty = new CustomerDetails();
 		return new ResponseEntity<CustomerDetails>(empty, HttpStatus.OK);
 	}

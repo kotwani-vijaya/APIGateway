@@ -1,31 +1,31 @@
 [{
-	"customerId": "N1410",
+	"customerId": "1",
 	"ZIPCode": "445001"
 }, {
-	"customerId": "R2601",
+	"customerId": "2",
 	"ZIPCode": "440001"
 }, {
-	"customerId": "S1310",
+	"customerId": "3",
 	"ZIPCode": "445001"
 }, {
-	"customerId": "A0109",
+	"customerId": "4",
 	"ZIPCode": "400018"
 }, {
-	"customerId": "T2609",
+	"customerId": "5",
 	"ZIPCode": "400025"
 }, {
-	"customerId": "B0211",
+	"customerId": "6",
 	"ZIPCode": "492001"
 }, {
-	"customerId": "R2512",
+	"customerId": "7",
 	"ZIPCode": "380001"
 }, {
-	"customerId": "N1707",
+	"customerId": "8",
 	"ZIPCode": "326036"
 }, {
-	"customerId": "S0606",
+	"customerId": "9",
 	"ZIPCode": "440001"
 }, {
-	"customerId": "A1511",
+	"customerId": "10",
 	"ZIPCode": "440017"
 }]

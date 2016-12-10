@@ -1,10 +1,12 @@
 package com.gl.productShipping;
 
+import java.util.List;
+
 public class ProductDetails {
 
 	public String productId;
 
-	public String shippingLocations;
+	public List<String> shippingLocations;
 
 	// *************************************************************************************
 
@@ -18,22 +20,24 @@ public class ProductDetails {
 
 	// ****************************************************************************************
 
-	public String getShippingLocations() {
-		return shippingLocations;
-	}
-
-	public void setShippingLocations(String shippingLocations) {
-		this.shippingLocations = shippingLocations;
-	}
+	
 	
 	public ProductDetails() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ProductDetails(String productId, String shippingCities) {
+	public List<String> getShippingLocations() {
+		return shippingLocations;
+	}
+
+	public void setShippingLocations(List<String> shippingLocations) {
+		this.shippingLocations = shippingLocations;
+	}
+
+	public ProductDetails(String productId, List<String> shippingLocations) {
 		super();
 		this.productId = productId;
-		this.shippingLocations = shippingCities;
+		this.shippingLocations = shippingLocations;
 	}
 	
 	

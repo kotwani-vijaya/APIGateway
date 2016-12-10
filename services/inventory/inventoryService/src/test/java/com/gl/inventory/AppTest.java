@@ -1,4 +1,4 @@
-package com.gl.customer.CustomerService;
+package com.gl.inventory;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

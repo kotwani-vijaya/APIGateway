@@ -1,6 +1,6 @@
-package com.gl.customer;
+package com.gl.inventory;
 
-public class CustomerNotFoundException extends Exception
+public class ProductNotFoundException extends Exception
 {
 	/**
 	 * 
@@ -24,7 +24,7 @@ public class CustomerNotFoundException extends Exception
 		this.message = message;
 	}
 
-	public CustomerNotFoundException(String code, String message) {
+	public ProductNotFoundException(String code, String message) {
 		super();
 		this.code = code;
 		this.message = message;

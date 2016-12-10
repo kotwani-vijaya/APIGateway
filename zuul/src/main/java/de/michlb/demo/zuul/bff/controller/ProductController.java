@@ -14,11 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import de.michlb.demo.zuul.dto.AggregatedResult;
 import de.michlb.demo.zuul.dto.Customer;
+import de.michlb.demo.zuul.dto.InventoryDetails;
 import de.michlb.demo.zuul.dto.Product;
 import de.michlb.demo.zuul.dto.RecommendationDetails;
 import de.michlb.demo.zuul.dto.RecommendationProduct;
 import de.michlb.demo.zuul.dto.Recommendations;
 import de.michlb.demo.zuul.feign.CustomerClient;
+import de.michlb.demo.zuul.feign.InventoryClient;
 import de.michlb.demo.zuul.feign.ProductClient;
 import de.michlb.demo.zuul.feign.RecommendationsClient;
 import de.michlb.demo.zuul.feign.ShippingClient;
@@ -41,6 +43,9 @@ public class ProductController {
   
   @Autowired
   private RecommendationsClient recommendationsClient;
+  
+  @Autowired
+  private InventoryClient inventoryClient;
 
   
   /**
@@ -56,6 +61,10 @@ public class ProductController {
 		  LOGGER.info("Request received with CID : " + cid +" for productId :" + productId + " and customerId : "+customerId);
 		Product product = JsonUtil.toObject(productClient.getProduct(productId, cid), Product.class);
 		if(product != null) {
+			InventoryDetails inventory = JsonUtil.toObject(inventoryClient.getInventory(productId, cid), InventoryDetails.class);
+			if(inventory != null) {
+				product.setQty(String.valueOf(inventory.getQuantityAvailable()));
+			}
 			RecommendationDetails recommendationDetails = JsonUtil.toObject(recommendationsClient.getRecommendations(productId, customerId, cid), RecommendationDetails.class);
 			if(recommendationDetails != null) {
 				List<RecommendationProduct> recommendedProdList = new ArrayList<RecommendationProduct>();

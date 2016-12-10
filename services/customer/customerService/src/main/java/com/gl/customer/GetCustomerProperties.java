@@ -7,15 +7,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class GetCustomerProperties 
-{
+public class GetCustomerProperties {
 	private static InputStream inputStream;
 	String path = null;
 	public void getProperties(String propertiesLocation) throws IOException {
 		inputStream = new FileInputStream(propertiesLocation);
 		Properties prop = new Properties();
 		
-		String propFileName = "ProductInformation.properties";
+		String propFileName = "CustomerDetails.properties";
 		try {
 			if (inputStream != null) {
 				prop.load(inputStream);

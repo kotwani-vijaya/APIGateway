@@ -1,15 +1,13 @@
 package com.gl.productShipping;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.core.LoggerContext;
+import org.apache.log4j.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -18,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
+
 
 @RestController
 public class ShippingController implements ErrorController {
@@ -37,19 +37,11 @@ public class ShippingController implements ErrorController {
 
 	public static ArrayList<ErrorDetails> errorList = new ArrayList<ErrorDetails>();
 	
-	private static LoggerContext context=(LoggerContext) LogManager.getContext(false);
-	
-	private static final Logger LOGGER = LogManager.getLogger(ShippingController.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(ShippingController.class.getName());
 
 	ProductDetails details = null;
 	
-	//****************************************************************************************************
 	
-	public static void setLogProperties(String logPathProperties){
-		File file=new File(logPathProperties);
-		context.setConfigLocation(file.toURI());
-	}
-
 	// ***************************************************************************************************
 
 	@RequestMapping(value = "/error", method = RequestMethod.GET)
@@ -104,22 +96,9 @@ public class ShippingController implements ErrorController {
 
 				ArrayList<String> cities = (JSONArray) json
 						.get("shippingLocations");
-				Iterator<String> iterator = cities.iterator();
-				while (iterator.hasNext()) {
-					System.out.println(iterator.next());
-				}
-				StringBuilder sb = new StringBuilder();
-				for (String s : cities) {
-					sb.append(s);
-					sb.append(" ");
-				}
+				
 
-				// int shippingLocations=(Integer)
-				// json.get("shippingLocations");
-
-				String shippingCities = sb.toString();
-
-				list.add(new ProductDetails(pId, shippingCities));
+				list.add(new ProductDetails(pId, cities));
 			}
 		}
 
@@ -219,208 +198,79 @@ public class ShippingController implements ErrorController {
 	@SuppressWarnings({ "unchecked", "unused" })
 	@RequestMapping(value = "shippingAvailability/{customerId}/{productId}", method = RequestMethod.GET)
 	public ResponseEntity<ShippingAvailability> shippingAvailability(
-			@PathVariable String customerId, @PathVariable String productId)
+			@PathVariable String customerId, @PathVariable String productId, @RequestHeader("CID") String cid)
 			throws Exception {
-
+		LOGGER.info("Request received with CID : " + cid +" for customerId :" + customerId +" for productId :" + productId);
 		ShippingAvailability available = new ShippingAvailability();
 
 		int check = 0;
 
 		if ((customerId != null) || (productId != null)) {
+			String availabilityDetails = "templates/shippingAvailability";
+
+			ClassLoader classLoader = new ShippingController()
+					.getClass()
+					.getClassLoader();
+
+			InputStream inputStream = classLoader
+					.getResourceAsStream(availabilityDetails);
+
+			BufferedReader reader = new BufferedReader(
+					new InputStreamReader(
+							inputStream));
+			StringBuilder out = new StringBuilder();
+			String line;
+			while ((line = reader.readLine()) != null) {
+				out.append(line);
+			}
+			reader.close();
+			ShippingAvailability shippingAvailability = JsonUtil.toObject(out.toString(), ShippingAvailability.class);
 
 			try {
-
-				for (int i = 0; i < list.size(); i++) {
-					for (int j = 0; j < customerList.size(); j++) {
-
-						if (list.get(i).getProductId().equals(productId)) {
-							if (customerList.get(j).getCustomerId()
-									.equals(customerId)) {
-								String productZip = list.get(i)
-										.getShippingLocations();
-
-								String customerZip = customerList.get(j)
-										.getZIP();
-
-								if (productZip.contains(customerZip)) {
-									for (int k = 0; k < availableList.size(); k++) {
-										if ((availableList.get(k).getZIP())
-												.equals(customerZip)) {
-											available = availableList.get(k);
-											check = 1;
-											break;
-										} else {
-
-											String availabilityDetails = "templates/shippingAvailability";
-
-											ClassLoader classLoader = new ShippingController()
-													.getClass()
-													.getClassLoader();
-
-											InputStream inputStream = classLoader
-													.getResourceAsStream(availabilityDetails);
-
-											BufferedReader reader = new BufferedReader(
-													new InputStreamReader(
-															inputStream));
-											StringBuilder out = new StringBuilder();
-											String line;
-											while ((line = reader.readLine()) != null) {
-												out.append(line);
-											}
-											reader.close();
-
-											JSONParser parser = new JSONParser();
-
-											Object obj = parser.parse(out
-													.toString());
-
-											JSONArray jsonArray = (JSONArray) obj;
-
-											for (int z = 0; z < jsonArray
-													.size(); z++) {
-
-												JSONObject json = (JSONObject) jsonArray
-														.get(z);
-
-												JSONObject jsonChild = (JSONObject) json
-														.get("ShippingDetails");
-
-												json.put("ShippingAvailable",
-														"No");
-
-												String shippingAvailable = (String) json
-														.get("ShippingAvailable")
-														.toString();
-
-												jsonChild.put("DeliveryZip",
-														"-");
-
-												String ZIP = (String) jsonChild
-														.get("DeliveryZip")
-														.toString();
-
-												jsonChild.put("City", "-");
-
-												String city = (String) jsonChild
-														.get("City").toString();
-
-												jsonChild
-														.put("EstimatedDeliveryTime",
-																"-");
-
-												String deliveryTime = (String) jsonChild
-														.get("EstimatedDeliveryTime")
-														.toString();
-
-												availableList
-														.add(new ShippingAvailability(
-																shippingAvailable,
-																ZIP, city,
-																deliveryTime));
-
-												available = availableList
-														.get(k);
-												ObjectWriter writer=new ObjectMapper().writer().withDefaultPrettyPrinter();
-												String json1=writer.writeValueAsString(available);
-												LOGGER.info("Logger information:\n"+json1);
-												check = 1;
-												break;
-											}
-										}
-									}
-								}
-
-							}
-						}
-
-					}
+				String customerZipCode = null;
+				for (CustomerDetails customer : customerList) {
+					if(customer.getCustomerId().equalsIgnoreCase(customerId)) {
+						customerZipCode = customer.getZIP();
+						break;
+					}					
 				}
+				if(customerZipCode != null){
+					List<String> productShippingLocations = null;
+					for(ProductDetails product : list){
+						if(product.getProductId().equalsIgnoreCase(productId)){
+							productShippingLocations = product.getShippingLocations();
+							break;
+						}
+					}
+					if(productShippingLocations != null && !productShippingLocations.isEmpty()){
+						
+						if(productShippingLocations.contains(customerZipCode)){
+							shippingAvailability.setShippingAvailable("Yes");
+							shippingAvailability.getShippingDetails().setDeliveryZip(customerZipCode);
+						} else {
+							shippingAvailability.setShippingAvailable("No");
+							shippingAvailability.setShippingDetails(null);
+						}
+						
+					}
+				} else {
+					shippingAvailability.setShippingAvailable("No");
+					shippingAvailability.setShippingDetails(null);
+				}
+				return new ResponseEntity<ShippingAvailability>(shippingAvailability,
+						HttpStatus.OK);
+				
 
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 
-			if (check == 1)
-
-				return new ResponseEntity<ShippingAvailability>(available,
-						HttpStatus.OK);
-			else {
-
-				return new ResponseEntity<ShippingAvailability>(available,
-						HttpStatus.NO_CONTENT);
-
-			}
 		}
 		return new ResponseEntity<ShippingAvailability>(available,
 				HttpStatus.BAD_REQUEST);
 	}
 
-	// ********************************************************************************************************
-
-	public static void availableController() throws Exception {
-
-		String availabilityDetails = "templates/shippingAvailability";
-
-		ClassLoader classLoader = new ShippingController().getClass()
-				.getClassLoader();
-
-		InputStream inputStream = classLoader
-				.getResourceAsStream(availabilityDetails);
-
-		BufferedReader reader = new BufferedReader(new InputStreamReader(
-				inputStream));
-		StringBuilder out = new StringBuilder();
-		String line;
-		while ((line = reader.readLine()) != null) {
-			out.append(line);
-		}
-		reader.close();
-
-		JSONParser parser = new JSONParser();
-
-		Object obj = parser.parse(out.toString());
-
-		JSONArray jsonArray = (JSONArray) obj;
-
-		@SuppressWarnings("rawtypes")
-		Iterator it = jsonArray.iterator();
-
-		if (jsonArray != null) {
-
-			while (it.hasNext()) {
-
-				JSONObject json = (JSONObject) it.next();
-
-				JSONObject jsonChild = (JSONObject) json.get("ShippingDetails");
-
-				String shippingAvailable = (String) json.get(
-						"ShippingAvailable").toString();
-
-				System.out.println("availability" + shippingAvailable);
-
-				String ZIP = (String) jsonChild.get("DeliveryZip").toString();
-
-				System.out.println("ZIP Code:" + ZIP);
-
-				String city = (String) jsonChild.get("City").toString();
-
-				System.out.println("city" + city);
-
-				String deliveryTime = (String) jsonChild.get(
-						"EstimatedDeliveryTime").toString();
-
-				System.out.println("time" + deliveryTime);
-
-				availableList.add(new ShippingAvailability(shippingAvailable,
-						ZIP, city, deliveryTime));
-
-			}
-
-		}
-
-	}
-
+	
 	// ********************************************************************************************************
 
 	public static void errorController() throws Exception {

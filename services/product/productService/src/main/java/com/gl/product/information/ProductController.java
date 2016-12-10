@@ -9,6 +9,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -32,10 +33,14 @@ public class ProductController {
 			@PathVariable String ProductId, @RequestHeader("CID") String cid) throws ProductNotFoundException {
 		LOGGER.info("Request received with CID : " + cid +" for productId :" + ProductId);
 		String product = "Product-" + ProductId;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Access-Control-Allow-Origin", "*");
+		responseHeaders.add("Access-Control-Allow-Header", "CID");
+		responseHeaders.add("Content-Type", "application/json");
 		ProductDetails productDetails = new ProductDetails();
 		if (ProductId.equals("") || ProductId.equals("\t") || ProductId.equals("\n")) {
 			LOGGER.info("Response logged with empty Request Id");
-			return new ResponseEntity<ProductDetails>(productDetails,
+			return new ResponseEntity<ProductDetails>(productDetails,responseHeaders,
 					HttpStatus.BAD_REQUEST);
 		}
 		
@@ -54,7 +59,7 @@ public class ProductController {
 						String json = ow.writeValueAsString(p);
 						LOGGER.info("Response returned for CID : " + cid +" and productId :" + ProductId + " is : \n"+json);
 						flag = 1;
-						return new ResponseEntity<ProductDetails>(p,
+						return new ResponseEntity<ProductDetails>(p,responseHeaders,
 								HttpStatus.OK);
 					}
 
@@ -68,7 +73,7 @@ public class ProductController {
 			throw new ProductNotFoundException("1244", "Invalid Product Id");
 		}
 		ProductDetails empty = new ProductDetails();
-		return new ResponseEntity<ProductDetails>(empty, HttpStatus.OK);
+		return new ResponseEntity<ProductDetails>(empty, responseHeaders, HttpStatus.OK);
 	}
 
 	@SuppressWarnings("unchecked")

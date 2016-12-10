@@ -14,6 +14,7 @@ public class CustomerDetails {
 	
 	public CustomerDetails(){}
 
+	
 	public String getName() {
 		return name;
 	}

@@ -1,20 +1,10 @@
-[{
-	"ShippingAvailable": "Yes",
-	"ShippingDetails": {
-		"DeliveryZip": "440017",
-		"City": "Nagpur",
-		"EstimatedDeliveryTime": "2-4 Business days"
-
-	}
-
-},
 {
-	"ShippingAvailable": "Yes",
-	"ShippingDetails": {
-		"DeliveryZip": "440001",
-		"City": "Pune",
-		"EstimatedDeliveryTime": "4-6 Business days"
+	"shippingAvailable": "Yes",
+	"shippingDetails": {
+		"deliveryZip": "440017",
+		"city": "Nagpur",
+		"estimatedDeliveryTime": "2-4 Business days"
 
 	}
 
-}]
+}

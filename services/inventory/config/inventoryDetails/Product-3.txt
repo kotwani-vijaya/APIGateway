@@ -1,0 +1,4 @@
+{
+  "InStock": "Yes",
+  "QuantityAvailable": 7
+}
