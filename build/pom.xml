@@ -18,6 +18,8 @@
 		<module>../services/shipping/shippingService</module>
 		<module>../services/product/productService</module>
 		<module>../services/recommendation/recommendationService</module>
+		<module>../services/recommendation/customerService</module>
+		<module>../services/recommendation/inventoryService</module>
 	</modules>
 
 	<build>

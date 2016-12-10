@@ -1,34 +1,35 @@
 package com.gl.recommendation;
 
-import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.core.LoggerContext;
+import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.gl.recommendation.dto.RecommendationDetails;
+import com.gl.recommendation.util.JsonUtil;
 
 @RestController
 public class RecommendationController {
 		
-	private static LoggerContext context = (LoggerContext) LogManager.getContext(false);
-	private static final Logger LOGGER = LogManager
-			.getLogger(RecommendationController.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(RecommendationController.class.getName());
 	
 	public static Map<String, List<Integer>> recommendationMap;
 
 	@RequestMapping(value = "/recommendations/{productId}/{customerId}", method = RequestMethod.GET)
 	public ResponseEntity<RecommendationDetails> getRecommendation(
-			@PathVariable String productId, @PathVariable String customerId) throws RecommendationNotFoundException {
-			LOGGER.info("Request logged with productId : " + productId);
+			@PathVariable String productId, @PathVariable String customerId, @RequestHeader("CID") String cid) throws RecommendationNotFoundException,
+		JsonGenerationException, JsonMappingException, IOException {
+		LOGGER.info("Request received with CID : " + cid +" for productId :" + productId);
 		List<Integer> recommendations = recommendationMap.get(productId);
 		RecommendationDetails recommendationDetails = new RecommendationDetails();
 		if(recommendations == null || recommendations.isEmpty()) {
@@ -36,17 +37,11 @@ public class RecommendationController {
 			return new ResponseEntity<RecommendationDetails>(recommendationDetails,
 					HttpStatus.BAD_REQUEST);
 		}				
-		recommendationDetails.setRecommendations(recommendations);		
+		recommendationDetails.setRecommendations(recommendations);	
+		LOGGER.info("Response returned for CID : " + cid +" and productId :" + productId + " is : \n"+JsonUtil.toJson(recommendationDetails));
 		return new ResponseEntity<RecommendationDetails>(recommendationDetails, HttpStatus.OK);
 	}
 
-	
-	
-	public void setLogProperties(String logPropPath)
-	{
-		File file = new File(logPropPath);
-		context.setConfigLocation(file.toURI());
-	}
 
 	public static Map<String, List<Integer>> getRecommendationMap() {
 		return recommendationMap;

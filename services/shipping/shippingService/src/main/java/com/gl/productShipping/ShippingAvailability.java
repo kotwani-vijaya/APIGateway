@@ -2,7 +2,9 @@ package com.gl.productShipping;
 
 public class ShippingAvailability {
 
-	String shippingAvailable,ZIP,city,deliveryTime;
+	String shippingAvailable;
+	
+	ShippingDetails shippingDetails;
 
 	public String getShippingAvailable() {
 		return shippingAvailable;
@@ -11,38 +13,22 @@ public class ShippingAvailability {
 	public void setShippingAvailable(String shippingAvailable) {
 		this.shippingAvailable = shippingAvailable;
 	}
+	
+		
 
-	public String getZIP() {
-		return ZIP;
+	public ShippingDetails getShippingDetails() {
+		return shippingDetails;
 	}
 
-	public void setZIP(String zIP) {
-		ZIP = zIP;
+	public void setShippingDetails(ShippingDetails shippingDetails) {
+		this.shippingDetails = shippingDetails;
 	}
 
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public String getDeliveryTime() {
-		return deliveryTime;
-	}
-
-	public void setDeliveryTime(String deliveryTime) {
-		this.deliveryTime = deliveryTime;
-	}
-
-	public ShippingAvailability(String shippingAvailable, String zIP,
-			String city, String deliveryTime) {
+	public ShippingAvailability(String shippingAvailable, ShippingDetails shippingDetails) {
 		super();
 		this.shippingAvailable = shippingAvailable;
-		ZIP = zIP;
-		this.city = city;
-		this.deliveryTime = deliveryTime;
+		
+		this.shippingDetails = shippingDetails;
 	}
 	
 	public ShippingAvailability() {
