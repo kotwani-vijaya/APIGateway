@@ -34,7 +34,7 @@ public class ProductController {
 		LOGGER.info("Request received with CID : " + cid +" for productId :" + ProductId);
 		String product = "Product-" + ProductId;
 		HttpHeaders responseHeaders = new HttpHeaders();
-		responseHeaders.add("Access-Control-Allow-Origin", "*");
+		responseHeaders.add("Access-Control-Allow-Origin", "localhost");
 		responseHeaders.add("Access-Control-Allow-Methods", "GET, POST, PATCH, PUT, DELETE, OPTIONS");
 		responseHeaders.add("Access-Control-Allow-Header", "Content-Type");		
 		ProductDetails productDetails = new ProductDetails();

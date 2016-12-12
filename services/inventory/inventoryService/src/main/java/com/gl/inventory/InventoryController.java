@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,12 +31,16 @@ public class InventoryController {
 	public ResponseEntity<InventoryDetails> getInventory(
 			@PathVariable String id,@RequestHeader("CID") String cid)throws ProductNotFoundException {
 		LOGGER.info("Request received with CID : " + cid + " and productId :"+id);
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Access-Control-Allow-Origin", "localhost");
+		responseHeaders.add("Access-Control-Allow-Methods", "GET, POST, PATCH, PUT, DELETE, OPTIONS");
+		responseHeaders.add("Access-Control-Allow-Header", "Content-Type");	
 		String product = "Product-" + id;
 		InventoryDetails inventoryDetails = new InventoryDetails();
 		if (id.equals("") || id.equals("\t") || id.equals("\n")) {
 			LOGGER.info("Response returned with CID : " + cid+" .The request was empty.");
 			LOGGER.info("Response logged with empty Request Id");
-			return new ResponseEntity<InventoryDetails>(inventoryDetails,
+			return new ResponseEntity<InventoryDetails>(inventoryDetails, responseHeaders,
 					HttpStatus.BAD_REQUEST);
 		}
 
@@ -54,7 +59,7 @@ public class InventoryController {
 							String json = ow.writeValueAsString(p);
 							LOGGER.info("Response returned with CID : " + cid+" for productId : "+id + " is : \n"+json);							
 							flag = 1;
-							return new ResponseEntity<InventoryDetails>(p,
+							return new ResponseEntity<InventoryDetails>(p, responseHeaders,
 									HttpStatus.OK);
 						}
 					}
@@ -69,7 +74,7 @@ public class InventoryController {
 			LOGGER.info("Response logged with product not found");
 			throw new ProductNotFoundException("1244", "Invalid Product Id");
 		}
-		return new ResponseEntity<InventoryDetails>(inventoryDetails,HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<InventoryDetails>(inventoryDetails, responseHeaders,HttpStatus.BAD_REQUEST);
 	}
 
 	public static InventoryDetails readJsonFile(String path) throws IOException {

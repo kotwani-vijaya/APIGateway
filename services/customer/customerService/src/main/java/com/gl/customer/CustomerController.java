@@ -6,6 +6,7 @@ import java.io.FileReader;
 import org.apache.log4j.Logger;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,10 +28,14 @@ public class CustomerController {
 	public ResponseEntity<CustomerDetails> getCustomerDetails(
 			@PathVariable("CustomerId") String id, @RequestHeader("CID") String cid) {
 		LOGGER.info("Request received with CID : " + cid +" for customerId : " + id);
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Access-Control-Allow-Origin", "localhost");
+		responseHeaders.add("Access-Control-Allow-Methods", "GET, POST, PATCH, PUT, DELETE, OPTIONS");
+		responseHeaders.add("Access-Control-Allow-Header", "Content-Type");	
 		if (id.equals("") || id.equals("\t") || id.equals("\n")) {
 			CustomerDetails cd = new CustomerDetails();
 			LOGGER.info("Response logged with empty Request Id");
-			return new ResponseEntity<CustomerDetails>(cd,
+			return new ResponseEntity<CustomerDetails>(cd, responseHeaders,
 					HttpStatus.BAD_REQUEST);
 		}
 		String CustomerId = "Customer-" + id;
@@ -50,7 +55,7 @@ public class CustomerController {
 						String json = ow.writeValueAsString(custDet);
 						LOGGER.info("Response returned for CID : " + cid +" with customerId :" + id + " is : \n"+ json);						
 						flag = 1;
-						return new ResponseEntity<CustomerDetails>(custDet,
+						return new ResponseEntity<CustomerDetails>(custDet, responseHeaders,
 								HttpStatus.OK);
 					}
 
@@ -61,7 +66,7 @@ public class CustomerController {
 		}
 		
 		CustomerDetails empty = new CustomerDetails();
-		return new ResponseEntity<CustomerDetails>(empty, HttpStatus.OK);
+		return new ResponseEntity<CustomerDetails>(empty, responseHeaders, HttpStatus.OK);
 	}
 
 	public static CustomerDetails readJsonFile(String path) {

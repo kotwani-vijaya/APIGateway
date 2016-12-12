@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,16 +31,20 @@ public class RecommendationController {
 			@PathVariable String productId, @PathVariable String customerId, @RequestHeader("CID") String cid) throws RecommendationNotFoundException,
 		JsonGenerationException, JsonMappingException, IOException {
 		LOGGER.info("Request received with CID : " + cid +" for productId :" + productId);
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Access-Control-Allow-Origin", "localhost");
+		responseHeaders.add("Access-Control-Allow-Methods", "GET, POST, PATCH, PUT, DELETE, OPTIONS");
+		responseHeaders.add("Access-Control-Allow-Header", "Content-Type");	
 		List<Integer> recommendations = recommendationMap.get(productId);
 		RecommendationDetails recommendationDetails = new RecommendationDetails();
 		if(recommendations == null || recommendations.isEmpty()) {
 			LOGGER.info("Response logged with recommendation not found");
-			return new ResponseEntity<RecommendationDetails>(recommendationDetails,
+			return new ResponseEntity<RecommendationDetails>(recommendationDetails,responseHeaders,
 					HttpStatus.BAD_REQUEST);
 		}				
 		recommendationDetails.setRecommendations(recommendations);	
 		LOGGER.info("Response returned for CID : " + cid +" and productId :" + productId + " is : \n"+JsonUtil.toJson(recommendationDetails));
-		return new ResponseEntity<RecommendationDetails>(recommendationDetails, HttpStatus.OK);
+		return new ResponseEntity<RecommendationDetails>(recommendationDetails,responseHeaders, HttpStatus.OK);
 	}
 
 

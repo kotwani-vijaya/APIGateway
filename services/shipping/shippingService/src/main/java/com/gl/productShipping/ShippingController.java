@@ -21,9 +21,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpHeaders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
+import com.gl.product.information.HttpHeaders;
 
 
 @RestController
@@ -201,6 +203,10 @@ public class ShippingController implements ErrorController {
 			@PathVariable String customerId, @PathVariable String productId, @RequestHeader("CID") String cid)
 			throws Exception {
 		LOGGER.info("Request received with CID : " + cid +" for customerId :" + customerId +" for productId :" + productId);
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Access-Control-Allow-Origin", "localhost");
+		responseHeaders.add("Access-Control-Allow-Methods", "GET, POST, PATCH, PUT, DELETE, OPTIONS");
+		responseHeaders.add("Access-Control-Allow-Header", "Content-Type");	
 		ShippingAvailability available = new ShippingAvailability();
 
 		int check = 0;
@@ -257,7 +263,7 @@ public class ShippingController implements ErrorController {
 					shippingAvailability.setShippingAvailable("No");
 					shippingAvailability.setShippingDetails(null);
 				}
-				return new ResponseEntity<ShippingAvailability>(shippingAvailability,
+				return new ResponseEntity<ShippingAvailability>(shippingAvailability,responseHeaders,
 						HttpStatus.OK);
 				
 
@@ -266,7 +272,7 @@ public class ShippingController implements ErrorController {
 			}
 
 		}
-		return new ResponseEntity<ShippingAvailability>(available,
+		return new ResponseEntity<ShippingAvailability>(available,responseHeaders,
 				HttpStatus.BAD_REQUEST);
 	}
 
