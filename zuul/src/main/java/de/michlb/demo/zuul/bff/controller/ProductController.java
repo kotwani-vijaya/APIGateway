@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import de.michlb.demo.zuul.dto.ShippingAvailability;
 
 import de.michlb.demo.zuul.dto.AggregatedResult;
 import de.michlb.demo.zuul.dto.Customer;
@@ -85,6 +86,8 @@ public class ProductController {
 		}
 		Customer customer = JsonUtil.toObject(customerClient.customerInfo(customerId, cid), Customer.class);
 		aggregatedResult.setCustomer(customer);
+		ShippingAvailability shippingAvailability = JsonUtil.toObject(shippingClient.info(customerId, productId, cid), ShippingAvailability.class);
+		aggregatedResult.setShippingAvailability(shippingAvailability);
 		LOGGER.info("Response returned for CID : " + cid + " is : \n"+JsonUtil.toJson(aggregatedResult));
 	} catch (Exception e) {
 		LOGGER.error(e);
