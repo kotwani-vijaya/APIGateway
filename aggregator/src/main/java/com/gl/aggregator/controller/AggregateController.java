@@ -19,6 +19,7 @@ import com.gl.aggregator.dto.Product;
 import com.gl.aggregator.dto.RecommendationDetails;
 import com.gl.aggregator.dto.RecommendationProduct;
 import com.gl.aggregator.dto.Recommendations;
+import com.gl.aggregator.dto.ShippingAvailability;
 import com.gl.aggregator.feign.CustomerClient;
 import com.gl.aggregator.feign.InventoryClient;
 import com.gl.aggregator.feign.ProductClient;
@@ -85,6 +86,8 @@ public class AggregateController {
 		}
 		Customer customer = JsonUtil.toObject(customerClient.customerInfo(customerId, cid), Customer.class);
 		aggregatedResult.setCustomer(customer);
+		ShippingAvailability shippingAvailability = JsonUtil.toObject(shippingClient.info(customerId, productId, cid), ShippingAvailability.class);
+		aggregatedResult.setShippingAvailability(shippingAvailability);
 		LOGGER.info("Response returned for CID : " + cid + " is : \n"+JsonUtil.toJson(aggregatedResult));
 	} catch (Exception e) {
 		LOGGER.error(e);

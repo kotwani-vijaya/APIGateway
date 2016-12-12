@@ -7,6 +7,8 @@ public class AggregatedResult {
 	private Product product;
 	
 	private Recommendations recommendations;
+	
+	private ShippingAvailability shippingAvailability;
 
 	public Customer getCustomer() {
 		return customer;
@@ -30,6 +32,14 @@ public class AggregatedResult {
 
 	public void setRecommendations(Recommendations recommendations) {
 		this.recommendations = recommendations;
+	}
+
+	public ShippingAvailability getShippingAvailability() {
+		return shippingAvailability;
+	}
+
+	public void setShippingAvailability(ShippingAvailability shippingAvailability) {
+		this.shippingAvailability = shippingAvailability;
 	}
 	
 	
