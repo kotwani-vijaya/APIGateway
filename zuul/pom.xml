@@ -13,9 +13,9 @@
     <!-- lookup parent from repository -->
   </parent>
 
-  <groupId>de.michlb.demo</groupId>
-  <artifactId>zuul</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <groupId>com.gl.apigateway</groupId>
+  <artifactId>ZuulServer</artifactId>
+  <version>1.0</version>
   <description>Cloud Zuul Server with integrated backends-for-frontends</description>
 
   <properties>

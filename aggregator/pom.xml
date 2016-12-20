@@ -13,9 +13,9 @@
     <!-- lookup parent from repository -->
   </parent>
 
-  <groupId>com.gl</groupId>
-  <artifactId>aggregator</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <groupId>com.gl.aggregator</groupId>
+  <artifactId>aggregatorService</artifactId>
+  <version>1.0</version>
   <description>Aggregator which will aggregate data from microservices</description>
 
   <properties>

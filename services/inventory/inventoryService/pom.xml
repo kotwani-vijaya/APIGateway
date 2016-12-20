@@ -4,7 +4,7 @@
 
 	<groupId>com.gl.inventory</groupId>
 	<artifactId>InventoryDetails</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0</version>
 	<packaging>jar</packaging>
 
 	<name>InventoryDetails</name>
