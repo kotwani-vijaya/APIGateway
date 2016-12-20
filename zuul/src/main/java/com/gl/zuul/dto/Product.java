@@ -1,4 +1,4 @@
-package com.gl.zuul.dto;
+package de.michlb.demo.zuul.dto;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ public class Product {
 	
 	private String imageUrl;
 	
-	private Seller sellerDetails;
+	private Seller seller;
 	
 	private String inStock;
 	
@@ -81,17 +81,18 @@ public class Product {
 	}
 
 	
-	public Seller getSellerDetails() {
-		return sellerDetails;
+	public Seller getSeller() {
+		return seller;
 	}
 
-	public void setSellerDetails(Seller sellerDetails) {
-		this.sellerDetails = sellerDetails;
+	public void setSeller(Seller seller) {
+		this.seller = seller;
 	}
 
 	public String getInStock() {
 		return inStock;
 	}
+
 
 	public void setInStock(String inStock) {
 		this.inStock = inStock;
