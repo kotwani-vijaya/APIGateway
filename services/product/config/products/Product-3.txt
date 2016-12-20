@@ -1,34 +1,34 @@
 {
 
-  "Name": "Moto G4 Plus",
+  "name": "Moto G4 Plus",
 
-  "Description": [
+  "description": [
 
     "Compact Design",   "Durable Body", "Classy look"
 
   ],
 
-  "Cost": "15000.00",
+  "cost": "15000.00",
 
-  "Discount": "20%",
+  "discount": "20%",
 
-  "InStock": "Yes",
+  "inStock": "Yes",
 
-  "Rating": "4.0",
+  "rating": "4.0",
 
-  "CashOnDelivery": "Yes",
+  "cashOnDelivery": "Yes",
 
-  "ImageURL": "http://ImageServiceEndPoint/imagename.jpg",
+  "imageUrl": "http://ImageServiceEndPoint/imagename.jpg",
 
-  "Seller": {
+  "seller": {
 
-    "Name": "City Collection",
+    "name": "City Collection",
 
-    "Ratings": "4.3",
+    "ratings": "4.3",
 
-    "RatingsFrom": "5",
+    "ratingsFrom": "5",
 
-    "Verified": "Yes"
+    "verified": "Yes"
 
   }
 

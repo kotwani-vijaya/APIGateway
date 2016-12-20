@@ -1,7 +1,7 @@
 {
-  "Name": "NandKishore Bairagi",
-  "Zip": "440017",
-  "City": "Nagpur",
-  "IsFirstPurchase": "No"
+  "name": "NandKishore Bairagi",
+  "zip": "440017",
+  "city": "Nagpur",
+  "isFirstPurchase": "No"
 }
 

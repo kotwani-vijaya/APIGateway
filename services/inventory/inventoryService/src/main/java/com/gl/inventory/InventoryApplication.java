@@ -3,23 +3,18 @@ package com.gl.inventory;
 import java.io.File;
 import java.io.IOException;
 
-import org.apache.log4j.PropertyConfigurator;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
-import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 /**
  * Hello world!
  *
  */
-@EnableAutoConfiguration
 @EnableEurekaClient
 @EnableWebMvc
-@EnableHystrix
 @SpringBootApplication
 @EnableDiscoveryClient
 public class InventoryApplication 
@@ -28,11 +23,11 @@ public class InventoryApplication
     {
     	String inventoryPropertyPath = args[0];
 		String log4j2Path = args[1];
-		PropertyConfigurator.configure(log4j2Path);
 		GetInventoryProperties properties = new GetInventoryProperties();
 		try {
 			properties.getProperties(inventoryPropertyPath);
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		String detailsLocation = properties.inventoryDetailLocation();
@@ -41,7 +36,8 @@ public class InventoryApplication
 		InventoryController fetchingFiles = new InventoryController();
 		fetchingFiles.setFileLocation(detailsLocation);
 		fetchingFiles.settingInventory(inventoryLocation);
-		fetchingFiles.setFiles(listOfFiles);		
+		fetchingFiles.setFiles(listOfFiles);
+		fetchingFiles.setLogProperties(log4j2Path);
     	SpringApplication.run(InventoryApplication.class, args);
     }
 }

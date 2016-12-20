@@ -1,6 +1,6 @@
 {
-  "Name": "Raj Yadav",
-  "Zip": "440014",
-  "City": "Nagpur",
-  "IsFirstPurchase": "No"
+  "name": "Raj Yadav",
+  "zip": "440014",
+  "city": "Nagpur",
+  "isFirstPurchase": "No"
 }

@@ -1,7 +1,7 @@
 {
    
-  "Name": "Shantanu Rastogi",
-  "Zip": "440012",
-  "City": "Nagpur",
-  "IsFirstPurchase": "Yes"
+  "name": "Shantanu Rastogi",
+  "zip": "440012",
+  "city": "Nagpur",
+  "isFirstPurchase": "Yes"
 }

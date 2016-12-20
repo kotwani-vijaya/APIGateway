@@ -1,34 +1,34 @@
 {
 
-  "Name": "Galaxy S8",
+  "name": "Galaxy S8",
 
-  "Description": [
+  "description": [
 
     "Compact Design",   "Corning Gorilla Glass", "Stylish body"
 
   ],
 
-  "Cost": "9599.00",
+  "cost": "9599.00",
 
-  "Discount": "5%",
+  "discount": "5%",
 
-  "InStock": "Yes",
+  "inStock": "Yes",
 
-  "Rating": "2.8",
+  "rating": "2.8",
 
-  "CashOnDelivery": "Yes",
+  "cashOnDelivery": "Yes",
 
-  "ImageURL": "http://ImageServiceEndPoint/imagename.jpg",
+  "imageUrl": "http://ImageServiceEndPoint/imagename.jpg",
 
-  "Seller": {
+  "seller": {
 
-    "Name": "Galaxy Store",
+    "name": "Galaxy Store",
 
-    "Ratings": "3.3",
+    "ratings": "3.3",
 
-    "RatingsFrom": "5",
+    "ratingsFrom": "5",
 
-    "Verified": "Yes"
+    "verified": "Yes"
 
   }
 

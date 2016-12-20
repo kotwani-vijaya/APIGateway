@@ -1,4 +1,4 @@
 {
-   "InStock": "Yes",
-  "QuantityAvailable": 10
+   "inStock": "Yes",
+  "quantityAvailable": 10
 }
