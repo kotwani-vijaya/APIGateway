@@ -4,28 +4,20 @@ server:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://127.0.0.1:8761/eureka/
-
+      defaultZone: http://127.0.0.1:9761/eureka/
+    
 zuul:
   #Service will be mapped under the /api URI
   prefix: /api
 #  Uncomment to disable auto-registering all services read from Eureka
 #  ignoredServices: '*'
   routes:
-    
-    product-by-address:
-      path: /product-service/**
-      url: http://localhost:9096
-    product-by-service:
-      path: /product-service/**
-      serviceId: product-service
-    shipping-by-address:
-      path: /shipping-service/**
-      url: http://localhost:9096
-    shipping-by-service:
-      path: /shipping-service/**
-      serviceId: shipping-service 
-   
+    composite:
+      path: /aggregator/**
+      serviceId: AGGREGATOR
+    product:
+      path: /product/**
+      serviceId: PRODUCT-SERVICE
 
 spring:
   application:
