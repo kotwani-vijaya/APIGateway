@@ -16,7 +16,6 @@ import com.gl.services.recommendation.util.FileUtil;
 @EnableWebMvc
 @EnableHystrix
 @SpringBootApplication
-@EnableDiscoveryClient
 public class App {
 
 	public static void main(String[] args) {

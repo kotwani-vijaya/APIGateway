@@ -18,7 +18,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableDiscoveryClient
 @EnableHystrix
 @ComponentScan(basePackages = "com.gl")
-@PropertySource("file:/share/productService/ProductInformation.properties")
+@PropertySource("file:/share/config/productService/ProductInformation.properties")
 public class ProductServiceApplication {
 
 	public static void main(String[] args) {

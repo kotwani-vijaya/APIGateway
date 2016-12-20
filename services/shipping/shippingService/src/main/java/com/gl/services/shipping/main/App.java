@@ -16,7 +16,6 @@ import com.gl.services.shipping.controller.ShippingController;
 @EnableWebMvc
 @EnableHystrix
 @SpringBootApplication
-@EnableDiscoveryClient
 public class App {
 
 	public static void main(String[] args) throws Exception {

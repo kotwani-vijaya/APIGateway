@@ -18,7 +18,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @SpringBootApplication
 @EnableAutoConfiguration
 @ComponentScan(basePackages = "com.gl")
-@PropertySource("file:/share/customerService/CustomerDetails.properties")
+@PropertySource("file:/share/config/customerService/CustomerDetails.properties")
 public class CustomerApplication 
 {
     public static void main( String[] args )

@@ -29,7 +29,6 @@ import com.gl.aggregator.feign.ShippingClient;
 import com.gl.aggregator.util.JsonUtil;
 
 @RestController
-@RequestMapping("/aggregated")
 public class AggregateController {
 	
 	private static final Logger LOGGER = Logger.getLogger(AggregateController.class.getName());

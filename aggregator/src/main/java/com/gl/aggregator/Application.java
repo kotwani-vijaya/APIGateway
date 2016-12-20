@@ -12,7 +12,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableAutoConfiguration
 @EnableEurekaClient
 @SpringBootApplication
-@EnableDiscoveryClient
 @EnableWebMvc
 @EnableFeignClients
 public class Application {

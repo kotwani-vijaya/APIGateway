@@ -16,7 +16,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableEurekaClient
 @EnableWebMvc
 @SpringBootApplication
-@EnableDiscoveryClient
 public class InventoryApplication 
 {
     public static void main( String[] args )
