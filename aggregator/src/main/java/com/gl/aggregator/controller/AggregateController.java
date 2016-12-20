@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -60,6 +61,10 @@ public class AggregateController {
 	  try {
 		  String cid = UUID.randomUUID().toString();
 		  LOGGER.info("Request received with CID : " + cid +" for productId :" + productId + " and customerId : "+customerId);
+		  HttpHeaders responseHeaders = new HttpHeaders();
+			responseHeaders.add("Access-Control-Allow-Origin", "localhost");
+			responseHeaders.add("Access-Control-Allow-Methods", "GET, POST, PATCH, PUT, DELETE, OPTIONS");
+			responseHeaders.add("Access-Control-Allow-Header", "Content-Type");		
 		Product product = JsonUtil.toObject(productClient.getProduct(productId, cid), Product.class);
 		if(product != null) {
 			InventoryDetails inventory = JsonUtil.toObject(inventoryClient.getInventory(productId, cid), InventoryDetails.class);

@@ -18,7 +18,7 @@ public class Product {
 	
 	private String imageUrl;
 	
-	private Seller sellerDetails;
+	private Seller seller;
 	
 	private String inStock;
 	
@@ -80,13 +80,13 @@ public class Product {
 		this.imageUrl = imageUrl;
 	}
 
-	
-	public Seller getSellerDetails() {
-		return sellerDetails;
+		
+	public Seller getSeller() {
+		return seller;
 	}
 
-	public void setSellerDetails(Seller sellerDetails) {
-		this.sellerDetails = sellerDetails;
+	public void setSeller(Seller seller) {
+		this.seller = seller;
 	}
 
 	public String getInStock() {
